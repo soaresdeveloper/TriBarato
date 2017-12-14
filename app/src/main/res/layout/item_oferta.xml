@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAMSUNG GALAXY S7 EDGE"
+        android:textSize="@dimen/txt_titulo"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/subtitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/medium_vertical"
+        android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma"
+        android:textSize="@dimen/txt_subtitulo"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/label_preco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_preco"/>
+
+        <TextView
+            android:id="@+id/preco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label_preco"
+            android:text="R$ 1500,00"
+            android:textSize="@dimen/txt_display_1"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btnQueroIsto"
+            android:layout_width="200dp"
+            android:layout_height="64dp"
+            android:layout_toRightOf="@id/preco"
+            android:layout_marginLeft="@dimen/large_horizontal"
+            android:background="@android:color/holo_orange_dark"
+            android:text="@string/lbl_quero_isto"
+            android:textSize="@dimen/txt_titulo"
+            android:textStyle="bold"
+            android:textColor="#fff"
+           />
+
+    </RelativeLayout>
+
+</LinearLayout>

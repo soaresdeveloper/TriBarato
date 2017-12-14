@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TEXTOS -->
+    <dimen name="txt_display_4">112sp</dimen>
+    <dimen name="txt_display_3">56sp</dimen>
+    <dimen name="txt_display_2">45sp</dimen>
+    <dimen name="txt_display_1">34sp</dimen>
+    <dimen name="txt_cabecalho">24sp</dimen>
+    <dimen name="txt_titulo">20sp</dimen>
+    <dimen name="txt_subtitulo">16sp</dimen>
+    <dimen name="txt_body">14sp</dimen>
+    <dimen name="txt_caption">12sp</dimen>
+    <dimen name="txt_button">14sp</dimen>
+
+    <!-- ESPAÇAMENTOS -->
+
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="large_vertical">24dp</dimen>
+    <dimen name="medium_vertical">16dp</dimen>
+    <dimen name="small_vertical">8dp</dimen>
+    <dimen name="large_horizontal">24dp</dimen>
+    <dimen name="medium_horizontal">16dp</dimen>
+    <dimen name="small_horizontal">8dp</dimen>
+</resources>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Tri Barato</string>
+    <string name="lbl_preco">a partir de:</string>
+    <string name="lbl_quero_isto">QUERO ISTO!</string>
 </resources>
