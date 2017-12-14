@@ -27,7 +27,7 @@ public class CriarOfertaActivity extends AppCompatActivity {
     Oferta oferta;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference mOfertasDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class CriarOfertaActivity extends AppCompatActivity {
 
         // Inicializacao componentes Firebase
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("ofertas");
+        mOfertasDatabaseReference = mFirebaseDatabase.getReference().child("ofertas");
 
         btnPublicarOferta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +67,7 @@ public class CriarOfertaActivity extends AppCompatActivity {
                     String data = dateFormat.format(date);
 
                     oferta = new Oferta(null, titulo, descricao, preco, endereco,data);
-                    mMessagesDatabaseReference.push().setValue(oferta).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    mOfertasDatabaseReference.push().setValue(oferta).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             ViewUtils.chamarToast(CriarOfertaActivity.this, "Oferta publicada com sucesso!");

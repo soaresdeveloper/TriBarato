@@ -48,7 +48,7 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
 //        }
 
         titulo.setText(oferta.getTitulo());
-        autor.setText("Enviado por: ".concat(oferta.getAutor()));
+        // autor.setText("Enviado por: ".concat(oferta.getAutor()));
         descricao.setText(oferta.getDescricao());
         preco.setText(oferta.getPreco());
         btnQueroIsto.setOnClickListener(new View.OnClickListener() {
