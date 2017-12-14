@@ -11,16 +11,18 @@ public class Oferta {
     private String descricao;
     private String preco;
     private String endereco;
+    private String data;
 
     public Oferta() {
     }
 
-    public Oferta(String autor, String titulo, String descricao, String preco, String endereco) {
+    public Oferta(String autor, String titulo, String descricao, String preco, String endereco, String data) {
         this.autor = autor;
         this.titulo = titulo;
         this.descricao = descricao;
         this.preco = preco;
         this.endereco = endereco;
+        this.data = data;
     }
 
     public String getAutor() {
@@ -61,5 +63,13 @@ public class Oferta {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }
