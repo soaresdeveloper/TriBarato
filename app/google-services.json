@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "113460177664",
+    "firebase_url": "https://tri-barato-app.firebaseio.com",
+    "project_id": "tri-barato-app",
+    "storage_bucket": "tri-barato-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113460177664:android:698d5dda24474c32",
+        "android_client_info": {
+          "package_name": "br.com.soaresdeveloper.tribarato"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113460177664-k16m4ftf83bjgv2pu8etn97h8056c15g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB65mt4KXHsYciDCPu710t23TttWKJaA0Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
