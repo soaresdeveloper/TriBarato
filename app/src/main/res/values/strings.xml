@@ -2,5 +2,13 @@
     <string name="app_name">Tri Barato</string>
     <string name="lbl_preco">a partir de:</string>
     <string name="lbl_quero_isto">QUERO ISTO!</string>
+
     <string name="btn_criar_oferta">CRIAR OFERTA</string>
+    <string name="btn_publicar_oferta">PUBLICAR OFERTA</string>
+    <string name="btn_limpar_campos">LIMPAR</string>
+
+    <string name="ht_titulo_oferta">Título da oferta</string>
+    <string name="ht_descricao">Descrição da oferta</string>
+    <string name="ht_preco">Preço</string>
+    <string name="ht_endereco">Endereço</string>
 </resources>
