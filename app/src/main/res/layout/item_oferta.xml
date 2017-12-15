@@ -2,24 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp">
 
-    <TextView
-        android:id="@+id/autor"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/small_vertical"
-        android:text="Enviado por: Lucas Soares"/>
+        android:layout_marginBottom="@dimen/small_vertical">
+
+        <TextView
+            android:id="@+id/autor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enviado por: Lucas Soares"
+            />
+
+        <TextView
+            android:id="@+id/dataHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@id/autor"
+            android:text="15/12/2017" />
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SAMSUNG GALAXY S7 EDGE"
-        android:textSize="@dimen/txt_titulo"
         android:textAllCaps="true"
-        android:textStyle="bold"/>
+        android:textSize="@dimen/txt_titulo"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/descricao"
@@ -39,7 +56,7 @@
             android:id="@+id/label_preco"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lbl_preco"/>
+            android:text="@string/lbl_preco" />
 
         <TextView
             android:id="@+id/preco"
@@ -47,22 +64,22 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/label_preco"
             android:text="R$ 1500,00"
-            android:textSize="@dimen/txt_display_1"
             android:textColor="@android:color/holo_orange_dark"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/txt_display_1"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnQueroIsto"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="64dp"
-            android:layout_toRightOf="@id/preco"
-            android:layout_marginLeft="@dimen/large_horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@id/label_preco"
             android:background="@android:color/holo_orange_dark"
             android:text="@string/lbl_quero_isto"
-            android:textSize="@dimen/txt_titulo"
-            android:textStyle="bold"
             android:textColor="#fff"
-           />
+            android:textSize="@dimen/txt_titulo"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -70,6 +87,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/medium_vertical"
-        android:background="#cccc"/>
+        android:background="#cccc" />
 
 </LinearLayout>

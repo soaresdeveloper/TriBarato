@@ -19,6 +19,9 @@ import br.com.soaresdeveloper.tribarato.entidades.Oferta;
 
 public class OfertaAdapter extends ArrayAdapter<Oferta> {
 
+    public static final String ENVIADO_POR = "Enviado por: ";
+    public static final String ANONIMO = "Usuário Anônimo";
+
     public OfertaAdapter(Context context, int resource, List<Oferta> objects) {
         super(context, resource, objects);
     }
@@ -33,6 +36,7 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
         TextView autor = (TextView) convertView.findViewById(R.id.autor);
         TextView descricao = (TextView) convertView.findViewById(R.id.descricao);
         TextView preco = (TextView) convertView.findViewById(R.id.preco);
+        TextView dataHora = (TextView) convertView.findViewById(R.id.dataHora);
         Button btnQueroIsto = (Button) convertView.findViewById(R.id.btnQueroIsto);
 
         Oferta oferta = getItem(position);
@@ -48,9 +52,14 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
 //        }
 
         titulo.setText(oferta.getTitulo());
-        // autor.setText("Enviado por: ".concat(oferta.getAutor()));
+        if(oferta.getAutor() != null){
+        autor.setText(ENVIADO_POR.concat(oferta.getAutor()));
+        }else{
+            autor.setText(ENVIADO_POR.concat(ANONIMO));
+        }
         descricao.setText(oferta.getDescricao());
         preco.setText(oferta.getPreco());
+        dataHora.setText(oferta.getData());
         btnQueroIsto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
