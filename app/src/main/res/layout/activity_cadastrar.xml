@@ -1,9 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_16"
     tools:context="br.com.soaresdeveloper.tribarato.CadastrarActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lbl_nome"
+        android:inputType="textCapWords" />
+
+    <EditText
+        android:id="@+id/sobrenome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lbl_sobrenome"
+        android:inputType="textCapWords" />
+
+    <EditText
+        android:id="@+id/emailCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ht_email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/senha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ht_senha"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:id="@+id/confirmasenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ht_confirma_senha"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:id="@+id/dataNascimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lbl_datanascimento"
+        android:inputType="date" />
+
+    <RadioGroup
+        android:id="@+id/groupSexo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/small_vertical"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:id="@+id/rbMasculino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_sexo_m" />
+
+        <RadioButton
+            android:id="@+id/rbFeminino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_sexo_f" />
+
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spEstado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/large_vertical"
+        android:entries="@array/estados"
+       />
+
+    <Button
+        android:id="@+id/btnCadastrarUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/btn_cadastrar_usuario"
+        android:textColor="#ffff"
+        android:textStyle="bold"/>
+
+
+</LinearLayout>

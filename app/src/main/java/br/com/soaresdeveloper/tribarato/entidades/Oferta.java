@@ -6,7 +6,7 @@ package br.com.soaresdeveloper.tribarato.entidades;
 
 public class Oferta {
 
-    private String autor;
+    private Usuario usuario;
     private String titulo;
     private String descricao;
     private String preco;
@@ -16,8 +16,8 @@ public class Oferta {
     public Oferta() {
     }
 
-    public Oferta(String autor, String titulo, String descricao, String preco, String endereco, String data) {
-        this.autor = autor;
+    public Oferta(Usuario usuario, String titulo, String descricao, String preco, String endereco, String data) {
+        this.usuario = usuario;
         this.titulo = titulo;
         this.descricao = descricao;
         this.preco = preco;
@@ -25,12 +25,12 @@ public class Oferta {
         this.data = data;
     }
 
-    public String getAutor() {
-        return autor;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getTitulo() {

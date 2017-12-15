@@ -2,12 +2,21 @@
     <string name="app_name">Tri Barato</string>
     <string name="lbl_preco">a partir de:</string>
     <string name="lbl_quero_isto">QUERO ISTO!</string>
+    <string name="lbl_nome">Nome</string>
+    <string name="lbl_sobrenome">Sobrenome</string>
+    <string name="lbl_estado">Estado</string>
+    <string name="lbl_cidade">Cidade</string>
+    <string name="lbl_sexo">Sexo</string>
+    <string name="lbl_sexo_m">Masculino</string>
+    <string name="lbl_sexo_f">Feminino</string>
+    <string name="lbl_datanascimento">Data nascimento</string>
 
     <string name="btn_criar_oferta">CRIAR OFERTA</string>
     <string name="btn_publicar_oferta">PUBLICAR OFERTA</string>
     <string name="btn_limpar_campos">LIMPAR</string>
     <string name="btn_entrar">ENTRAR</string>
     <string name="btn_cadastrar">CADASTRE-SE</string>
+    <string name="btn_cadastrar_usuario">CADASTRAR</string>
 
     <string name="ht_titulo_oferta">Título da oferta</string>
     <string name="ht_descricao">Descrição da oferta</string>
@@ -15,4 +24,5 @@
     <string name="ht_endereco">Endereço</string>
     <string name="ht_email">Email</string>
     <string name="ht_senha">Senha</string>
+    <string name="ht_confirma_senha">Confirmar senha</string>
 </resources>

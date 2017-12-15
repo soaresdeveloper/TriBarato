@@ -83,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    Oferta ofertaExcluida = dataSnapshot.getValue(Oferta.class);
-                    mOfertaAdapter.remove(ofertaExcluida);
                 }
 
                 @Override
@@ -97,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             };
 
             // Adiciona o Listener que escuta apenas o child messages
-            mOfertasDatabaseReference.addChildEventListener(mChildEventListener);
+            mOfertasDatabaseReference.orderByChild("data").addChildEventListener(mChildEventListener);
         }
     }
 

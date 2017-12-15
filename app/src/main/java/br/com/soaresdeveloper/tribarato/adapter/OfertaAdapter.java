@@ -52,8 +52,8 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
 //        }
 
         titulo.setText(oferta.getTitulo());
-        if(oferta.getAutor() != null){
-        autor.setText(ENVIADO_POR.concat(oferta.getAutor()));
+        if(oferta.getUsuario() != null){
+        autor.setText(ENVIADO_POR.concat(oferta.getUsuario().getNomeCompleto()));
         }else{
             autor.setText(ENVIADO_POR.concat(ANONIMO));
         }
