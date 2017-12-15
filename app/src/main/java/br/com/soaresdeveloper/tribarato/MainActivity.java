@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mOfertasDatabaseReference;
+    private FirebaseAuth mAuth;
     private ChildEventListener mChildEventListener;
 
     @Override
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Inicialização componentes Firebase
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         mOfertasDatabaseReference = mFirebaseDatabase.getReference().child("ofertas");
 
 
@@ -95,6 +99,20 @@ public class MainActivity extends AppCompatActivity {
             // Adiciona o Listener que escuta apenas o child messages
             mOfertasDatabaseReference.addChildEventListener(mChildEventListener);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Verifica se o usuario está conectado
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            // TODO Funcionalidade para usuario logado
+        }else{
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     @Override

@@ -6,9 +6,13 @@
     <string name="btn_criar_oferta">CRIAR OFERTA</string>
     <string name="btn_publicar_oferta">PUBLICAR OFERTA</string>
     <string name="btn_limpar_campos">LIMPAR</string>
+    <string name="btn_entrar">ENTRAR</string>
+    <string name="btn_cadastrar">CADASTRE-SE</string>
 
     <string name="ht_titulo_oferta">Título da oferta</string>
     <string name="ht_descricao">Descrição da oferta</string>
     <string name="ht_preco">Preço</string>
     <string name="ht_endereco">Endereço</string>
+    <string name="ht_email">Email</string>
+    <string name="ht_senha">Senha</string>
 </resources>
