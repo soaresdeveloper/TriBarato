@@ -10,6 +10,7 @@
     <string name="lbl_sexo_m">Masculino</string>
     <string name="lbl_sexo_f">Feminino</string>
     <string name="lbl_datanascimento">Data nascimento</string>
+    <string name="sign_out">Sair</string>
 
     <string name="btn_criar_oferta">CRIAR OFERTA</string>
     <string name="btn_publicar_oferta">PUBLICAR OFERTA</string>

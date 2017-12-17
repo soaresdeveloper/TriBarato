@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         mSenha = (EditText) findViewById(R.id.senhaEntrar);
         btnEntrar = (Button) findViewById(R.id.btnEntrar);
         btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
-        mProgressBar = (ProgressBar) findViewById(R.id.progress);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressLogin);
 
         // Inicializacao componentes Firebase
         mAuth = FirebaseAuth.getInstance();

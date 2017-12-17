@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -36,6 +37,7 @@ public class CadastrarActivity extends AppCompatActivity {
     RadioGroup groupSexo;
     RadioButton rbMasculino, rbFeminino;
     Button btnCadastrar;
+    ProgressBar mProgressBar;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
@@ -58,6 +60,7 @@ public class CadastrarActivity extends AppCompatActivity {
         rbMasculino = (RadioButton) findViewById(R.id.rbMasculino);
         rbFeminino = (RadioButton) findViewById(R.id.rbFeminino);
         btnCadastrar = (Button) findViewById(R.id.btnCadastrarUsuario);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressCdUsuario);
 
         // Inicializacao comp Firebase
         mAuth = FirebaseAuth.getInstance();
@@ -79,6 +82,8 @@ public class CadastrarActivity extends AppCompatActivity {
                 if(ViewUtils.validarCampos(campos)){
                     if (validarSenha()){
 
+                        mProgressBar.setVisibility(View.VISIBLE);
+
                         final String nome = mNome.getText().toString();
                         final String sobrenome = mSobrenome.getText().toString();
                         String email = mEmail.getText().toString();
@@ -94,6 +99,7 @@ public class CadastrarActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             // Sign in success, update UI with the signed-in user's information
                                             Log.d(TAG, "createUserWithEmail:success");
+                                            mProgressBar.setVisibility(View.INVISIBLE);
                                             FirebaseUser user = mAuth.getCurrentUser();
 
                                             // cadastro usuario

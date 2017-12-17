@@ -90,5 +90,13 @@
         android:textColor="#ffff"
         android:textStyle="bold"/>
 
+    <ProgressBar
+        android:id="@+id/progressCdUsuario"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_gravity="center"/>
+
 
 </LinearLayout>

@@ -1,12 +1,19 @@
 package br.com.soaresdeveloper.tribarato;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -18,15 +25,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.soaresdeveloper.tribarato.Utils.ViewUtils;
 import br.com.soaresdeveloper.tribarato.adapter.OfertaAdapter;
 import br.com.soaresdeveloper.tribarato.entidades.Oferta;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String ANONIMO = "anônimo";
+    public static final String ONLINE = "Você está conectado!";
+    public static final int RC_SIGN_IN = 1;
 
     Button btnCriarOferta;
     ListView mOfertasListView;
+
 
     private String mUsuario;
     private OfertaAdapter mOfertaAdapter;
@@ -34,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mOfertasDatabaseReference;
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ChildEventListener mChildEventListener;
 
     @Override
@@ -66,8 +78,95 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Sincroniza as ofertas com o banco
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // usuario esta logado
+                    onSignedInInitializa();
+                } else {
+                    // usuario não esta logado
+                    onSignedOutCleanup();
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            ;
+        };
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mAuthStateListener != null) {
+            mAuth.removeAuthStateListener(mAuthStateListener);
+        }
+        detachDatabaseReadListener();
+        mOfertaAdapter.clear();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "Vocês está conectado!", Toast.LENGTH_SHORT).show();
+            } else if (resultCode == RESULT_CANCELED) {
+                finish();
+            }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.sign_out_menu:
+                AuthUI.getInstance().signOut(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // Configura o nome do usuario
+    private void onSignedInInitializa() {
+        attachDatabaseReadListener();
+    }
+
+    // Limpar todas as informações de usuario e mensagem quando ele desconectar
+    private void onSignedOutCleanup() {
+        mOfertaAdapter.clear();
+        detachDatabaseReadListener();
+    }
+
+    private void detachDatabaseReadListener() {
+        if (mChildEventListener != null) {
+            mOfertasDatabaseReference.removeEventListener(mChildEventListener);
+            mChildEventListener = null;
+        }
+    }
+
+    private void attachDatabaseReadListener() {
         if (mChildEventListener == null) {
+            // Sincroniza o banco com a aplicacao
             // Sincroniza o banco com a aplicacao
             mChildEventListener = new ChildEventListener() {
                 @Override
@@ -99,24 +198,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Verifica se o usuario está conectado
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            // TODO Funcionalidade para usuario logado
-        }else{
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
 
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        mOfertaAdapter.clear();
-    }
 }

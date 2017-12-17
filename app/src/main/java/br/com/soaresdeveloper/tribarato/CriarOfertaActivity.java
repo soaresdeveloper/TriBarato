@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +31,7 @@ public class CriarOfertaActivity extends AppCompatActivity {
 
     EditText edtTituloOferta, edtDescricaoOferta, edtPrecoOferta, edtEnderecoOferta;
     Button btnPublicarOferta, btnLimparCampos;
+    ProgressBar mProgressBar;
 
     private Oferta oferta;
     private Usuario mUsuario;
@@ -50,6 +52,7 @@ public class CriarOfertaActivity extends AppCompatActivity {
         edtEnderecoOferta = (EditText) findViewById(R.id.enderecoOferta);
         btnPublicarOferta = (Button) findViewById(R.id.btnPublicarOferta);
         btnLimparCampos = (Button) findViewById(R.id.btnLimparCampos);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressPbOferta);
 
         // Inicializacao componentes Firebase
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -69,6 +72,8 @@ public class CriarOfertaActivity extends AppCompatActivity {
 
                 if (ViewUtils.validarCampos(campos)) {
 
+                    mProgressBar.setVisibility(View.VISIBLE);
+
                     String titulo = edtTituloOferta.getText().toString();
                     String descricao = edtDescricaoOferta.getText().toString();
                     String preco = edtPrecoOferta.getText().toString();
@@ -82,6 +87,7 @@ public class CriarOfertaActivity extends AppCompatActivity {
                     mOfertasDatabaseReference.push().setValue(oferta).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            mProgressBar.setVisibility(View.INVISIBLE);
                             ViewUtils.chamarToast(CriarOfertaActivity.this, "Oferta publicada com sucesso!");
                             limparCampos();
                         }
