@@ -25,7 +25,7 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
 
     public static final String ENVIADO_POR = "Enviado por: ";
     public static final String ANONIMO = "Usuário Anônimo";
-    public static final String LOJA_VIRTUAL = "Loja virtual";
+    public static final String MAPS = "http://www.maps.google.com.br/maps?q=";
 
     public OfertaAdapter(Context context, int resource, List<Oferta> objects) {
         super(context, resource, objects);
@@ -69,11 +69,20 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
         btnQueroIsto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Implementar funcionalidade de redirecionamento
-                // para sites ou serviço de Google Maps caso o seja endereço de loja fisica
                 if (oferta.getSite() != null && !oferta.getSite().trim().equals("")) {
+                    // se for loja virtual
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(oferta.getSite()));
+                    ContextCompat.startActivity(getContext(), intent, null);
+                }else if(oferta.getLocal() != null && !oferta.getLocal().trim().equals("")){
+                    // Se for loja fisica
+                    StringBuilder url = new StringBuilder(MAPS)
+                            .append(oferta.getLocal()).append("+")
+                            .append(oferta.getEstado().replace(" ","+")).append("+")
+                            .append(oferta.getCidade().replace(" ","+"));
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url.toString()));
                     ContextCompat.startActivity(getContext(), intent, null);
                 }
             }

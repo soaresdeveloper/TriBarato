@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
             };
 
             // Adiciona o Listener que escuta apenas o child messages
-            mOfertasDatabaseReference.orderByChild("data").addChildEventListener(mChildEventListener);
+            mOfertasDatabaseReference.addChildEventListener(mChildEventListener);
             ViewUtils.dismissProgress();
         }
     }
