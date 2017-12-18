@@ -18,6 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -84,33 +87,36 @@ public class CriarOfertaActivity extends AppCompatActivity {
 
                 if (ViewUtils.validarCampos(campos)) {
 
-                    ViewUtils.chamarProgress(CriarOfertaActivity.this, "Publicando...");
+                    if (validarURL()) {
 
-                    String titulo = edtTituloOferta.getText().toString();
-                    String descricao = edtDescricaoOferta.getText().toString();
-                    String preco = edtPrecoOferta.getText().toString();
-                    String local = edtLocalOferta.getText().toString();
-                    String estado = edtEstadoOferta.getText().toString();
-                    String cidade = edtCidadeOferta.getText().toString();
-                    String site = edtSiteOferta.getText().toString();
-                    if (!site.trim().equals("") || site != null) {
-                        if (!site.startsWith("http://") && !site.startsWith("https://")) {
-                            site = "http://" + site;
-                        }
+                        ViewUtils.chamarProgress(CriarOfertaActivity.this, "Publicando...");
+
+                        String titulo = edtTituloOferta.getText().toString();
+                        String descricao = edtDescricaoOferta.getText().toString();
+                        String preco = edtPrecoOferta.getText().toString();
+                        String local = edtLocalOferta.getText().toString();
+                        String estado = edtEstadoOferta.getText().toString();
+                        String cidade = edtCidadeOferta.getText().toString();
+                        String site = edtSiteOferta.getText().toString();
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        Date date = new Date();
+                        String data = dateFormat.format(date);
+
+                        oferta = new Oferta(mUsuario, null, titulo, descricao, preco, estado, cidade, local, site, data);
+                        mOfertasDatabaseReference.push().setValue(oferta).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                                ViewUtils.dismissProgress();
+                                ViewUtils.chamarToast(CriarOfertaActivity.this, "Oferta publicada com sucesso!");
+
+                                limparCampos();
+
+                                Intent intent = new Intent(CriarOfertaActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
                     }
-                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    Date date = new Date();
-                    String data = dateFormat.format(date);
-
-                    oferta = new Oferta(mUsuario, null, titulo, descricao, preco, estado, cidade, local, site, data);
-                    mOfertasDatabaseReference.push().setValue(oferta).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            ViewUtils.dismissProgress();
-                            ViewUtils.chamarToast(CriarOfertaActivity.this, "Oferta publicada com sucesso!");
-                            limparCampos();
-                        }
-                    });
                 }
             }
         });
@@ -131,6 +137,33 @@ public class CriarOfertaActivity extends AppCompatActivity {
         edtEstadoOferta.setText("");
         edtCidadeOferta.setText("");
         edtLocalOferta.setText("");
+    }
+
+    private boolean validarURL() {
+
+        boolean r = true;
+        if (!edtSiteOferta.getText().toString().isEmpty() && edtSiteOferta.getText().toString() != null) {
+            try {
+                if (!edtSiteOferta.getText().toString().trim().equals("") || edtSiteOferta.getText() != null) {
+                    if (!edtSiteOferta.getText().toString().startsWith("http://") && !edtSiteOferta.getText().toString().startsWith("https://")) {
+                        edtSiteOferta.setText("http://" + edtSiteOferta.getText().toString());
+                    }
+                }
+                URL url = new URL(edtSiteOferta.getText().toString());
+                url.toURI();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                edtSiteOferta.setError("Endereço URL inválido, tente algo como: www.meusite.com.br");
+                r = false;
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+                edtSiteOferta.setError("Endereço URL inválido, tente algo como: www.meusite.com.br");
+                r = false;
+            }
+        }
+
+        return r;
     }
 
     @Override
@@ -183,7 +216,7 @@ class MascaraMonetaria implements TextWatcher {
         isUpdating = true;
         String str = s.toString();
         // Verifica se já existe a máscara no texto.
-        boolean hasMask = ((str.indexOf("R$") > -1 || str.indexOf("R$") > -1) &&
+        boolean hasMask = ((str.indexOf("R$") > -1 || str.indexOf("$") > -1) &&
                 (str.indexOf(".") > -1 || str.indexOf(",") > -1));
         // Verificamos se existe máscara
         if (hasMask) {
