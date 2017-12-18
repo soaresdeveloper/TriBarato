@@ -31,7 +31,6 @@ import br.com.soaresdeveloper.tribarato.entidades.Oferta;
 public class MainActivity extends AppCompatActivity {
 
     public static final String ANONIMO = "anônimo";
-    public static final String ONLINE = "Você está conectado!";
     public static final int RC_SIGN_IN = 1;
 
     Button btnCriarOferta;
@@ -200,6 +199,4 @@ public class MainActivity extends AppCompatActivity {
             ViewUtils.dismissProgress();
         }
     }
-
-
 }

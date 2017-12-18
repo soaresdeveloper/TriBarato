@@ -14,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -31,13 +34,16 @@ import br.com.soaresdeveloper.tribarato.entidades.Usuario;
 public class CadastrarActivity extends AppCompatActivity {
 
     private static final String TAG = " TRI BARATO ";
+    private static final String BANNER_ID = "ca-app-pub-2446788647018391/8727887162";
+
 
     EditText mNome, mSobrenome, mEmail, mSenha, mConfirmaSenha, mDataNascimento;
     Spinner mSpinnerEstado;
     RadioGroup groupSexo;
     RadioButton rbMasculino, rbFeminino;
     Button btnCadastrar;
-    ProgressBar mProgressBar;
+    private AdView mAdView;
+
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
@@ -60,12 +66,19 @@ public class CadastrarActivity extends AppCompatActivity {
         rbMasculino = (RadioButton) findViewById(R.id.rbMasculino);
         rbFeminino = (RadioButton) findViewById(R.id.rbFeminino);
         btnCadastrar = (Button) findViewById(R.id.btnCadastrarUsuario);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressCdUsuario);
 
         // Inicializacao comp Firebase
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mUsuarioDatabaseReference = mFirebaseDatabase.getReference().child("usuarios");
+
+        // Inicializa anuncios
+        // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
+        MobileAds.initialize(this, BANNER_ID);
+        mAdView = (AdView) findViewById(R.id.adBannerCadastrar);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +95,7 @@ public class CadastrarActivity extends AppCompatActivity {
                 if(ViewUtils.validarCampos(campos)){
                     if (validarSenha()){
 
-                        mProgressBar.setVisibility(View.VISIBLE);
+                        ViewUtils.chamarProgress(CadastrarActivity.this, "Criando sua conta...");
 
                         final String nome = mNome.getText().toString();
                         final String sobrenome = mSobrenome.getText().toString();
@@ -99,7 +112,8 @@ public class CadastrarActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             // Sign in success, update UI with the signed-in user's information
                                             Log.d(TAG, "createUserWithEmail:success");
-                                            mProgressBar.setVisibility(View.INVISIBLE);
+
+                                            ViewUtils.dismissProgress();
                                             FirebaseUser user = mAuth.getCurrentUser();
 
                                             // cadastro usuario

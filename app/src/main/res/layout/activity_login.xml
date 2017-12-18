@@ -1,58 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Theme.AppCompat.DayNight.NoActionBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_16"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context="br.com.soaresdeveloper.tribarato.LoginActivity">
 
-    <EditText
-        android:id="@+id/emailEntrar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/ht_email"
-        android:inputType="textEmailAddress"
-        android:maxLines="1" />
+        android:layout_marginTop="164dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/senhaEntrar"
+        <EditText
+            android:id="@+id/emailEntrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ht_email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/senhaEntrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/medium_vertical"
+            android:hint="@string/ht_senha"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+        <Button
+            android:id="@+id/btnEntrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_vertical"
+            android:background="@color/colorPrimary"
+            android:text="@string/btn_entrar"
+            android:textStyle="bold"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:id="@+id/btnCadastrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_vertical"
+            android:background="@color/com_facebook_button_border_color_focused"
+            android:text="@string/btn_cadastrar"
+            android:textColor="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adBannerLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/medium_vertical"
-        android:hint="@string/ht_senha"
-        android:inputType="textPassword"
-        android:maxLines="1" />
-
-    <Button
-        android:id="@+id/btnEntrar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/small_vertical"
-        android:background="@color/colorPrimary"
-        android:text="@string/btn_entrar"
-        android:textStyle="bold"
-        android:textColor="#ffffff"/>
-
-    <Button
-        android:id="@+id/btnCadastrar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/small_vertical"
-        android:background="@color/com_facebook_button_border_color_focused"
-        android:text="@string/btn_cadastrar"
-        android:textColor="@color/colorPrimary"/>
-
-    <ProgressBar
-        android:id="@+id/progressLogin"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-2446788647018391/8727887162">
+    </com.google.android.gms.ads.AdView>
 
-</LinearLayout>
+
+</RelativeLayout>
+

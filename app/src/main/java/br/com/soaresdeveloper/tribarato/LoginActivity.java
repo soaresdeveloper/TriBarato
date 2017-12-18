@@ -9,7 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,12 +28,14 @@ import br.com.soaresdeveloper.tribarato.Utils.ViewUtils;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "TRI BARATO ";
+    private static final String BANNER_ID = "ca-app-pub-2446788647018391/8727887162";
+    public static final int RC_SIGN_IN = 1;
 
     Button btnEntrar, btnCadastrar;
-    ProgressBar mProgressBar;
     EditText mEmail, mSenha;
 
     private FirebaseAuth mAuth;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +46,32 @@ public class LoginActivity extends AppCompatActivity {
         mSenha = (EditText) findViewById(R.id.senhaEntrar);
         btnEntrar = (Button) findViewById(R.id.btnEntrar);
         btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressLogin);
 
         // Inicializacao componentes Firebase
         mAuth = FirebaseAuth.getInstance();
+
+        // Inicializa anuncios
+        // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
+        MobileAds.initialize(this, BANNER_ID);
+        mAdView = (AdView) findViewById(R.id.adBannerLogin);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                ViewUtils.chamarProgress(LoginActivity.this, "Entrando ...");
+
                 List<EditText> campos = new ArrayList<EditText>();
                 campos.add(mEmail);
                 campos.add(mSenha);
+
 
                 if (ViewUtils.validarCampos(campos)) {
 
                     String email = mEmail.getText().toString();
                     String password = mSenha.getText().toString();
-                    mProgressBar.isIndeterminate();
-                    mProgressBar.setVisibility(View.VISIBLE);
 
                     mAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -68,7 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        mProgressBar.setVisibility(View.INVISIBLE);
+
+                                        ViewUtils.dismissProgress();
 
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         startActivity(intent);
@@ -102,6 +116,17 @@ public class LoginActivity extends AppCompatActivity {
         if (currentUser != null) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+           if (resultCode == RESULT_CANCELED) {
+                finish();
+            }
         }
     }
 }

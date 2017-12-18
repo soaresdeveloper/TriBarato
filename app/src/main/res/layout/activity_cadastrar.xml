@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="bottom"
     android:padding="@dimen/padding_16"
     tools:context="br.com.soaresdeveloper.tribarato.CadastrarActivity">
 
@@ -90,13 +91,17 @@
         android:textColor="#ffff"
         android:textStyle="bold"/>
 
-    <ProgressBar
-        android:id="@+id/progressCdUsuario"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adBannerCadastrar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_gravity="center"/>
+        android:layout_marginTop="@dimen/large_vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-2446788647018391/8727887162">
+    </com.google.android.gms.ads.AdView>
 
 
 </LinearLayout>

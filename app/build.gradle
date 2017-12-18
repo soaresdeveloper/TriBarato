@@ -25,8 +25,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    // Displaying images
-
+    // admob
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
     // Firebase
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
