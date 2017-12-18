@@ -25,14 +25,6 @@ public class Usuario {
         this.sexo = sexo;
     }
 
-    public String getNomeCompleto(){
-        if (nome != null && sobrenome != null) {
-            return nome.concat(" ").concat(sobrenome);
-        }else{
-            return "";
-        }
-    }
-
     public String getNome() {
         return nome;
     }

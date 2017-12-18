@@ -2,10 +2,14 @@ package br.com.soaresdeveloper.tribarato.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,6 +25,7 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
 
     public static final String ENVIADO_POR = "Enviado por: ";
     public static final String ANONIMO = "Usuário Anônimo";
+    public static final String LOJA_VIRTUAL = "Loja virtual";
 
     public OfertaAdapter(Context context, int resource, List<Oferta> objects) {
         super(context, resource, objects);
@@ -39,7 +44,7 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
         TextView dataHora = (TextView) convertView.findViewById(R.id.dataHora);
         Button btnQueroIsto = (Button) convertView.findViewById(R.id.btnQueroIsto);
 
-        Oferta oferta = getItem(position);
+        final Oferta oferta = getItem(position);
 
 //      TODO Implementar envio de fotos nas ofertas
 //        boolean isPhoto = message.getPhotoUrl() != null;
@@ -52,9 +57,10 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
 //        }
 
         titulo.setText(oferta.getTitulo());
-        if(oferta.getUsuario() != null){
-        autor.setText(ENVIADO_POR.concat(oferta.getUsuario().getNomeCompleto()));
-        }else{
+        if (oferta.getUsuario() != null) {
+            String mUsuario = oferta.getUsuario().getNome().concat(" ").concat(oferta.getUsuario().getSobrenome());
+            autor.setText(ENVIADO_POR.concat(mUsuario));
+        } else {
             autor.setText(ENVIADO_POR.concat(ANONIMO));
         }
         descricao.setText(oferta.getDescricao());
@@ -65,6 +71,11 @@ public class OfertaAdapter extends ArrayAdapter<Oferta> {
             public void onClick(View v) {
                 // TODO Implementar funcionalidade de redirecionamento
                 // para sites ou serviço de Google Maps caso o seja endereço de loja fisica
+                if (oferta.getSite() != null && !oferta.getSite().trim().equals("")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(oferta.getSite()));
+                    ContextCompat.startActivity(getContext(), intent, null);
+                }
             }
         });
 

@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -68,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
         final List<Oferta> ofertas = new ArrayList<>();
         mOfertaAdapter = new OfertaAdapter(this, R.layout.item_oferta, ofertas);
         mOfertasListView.setAdapter(mOfertaAdapter);
+
+        // Chamar Progress
+        ViewUtils.chamarProgress(MainActivity.this, "Buscando Ofertas...");
 
 
         btnCriarOferta.setOnClickListener(new View.OnClickListener() {
@@ -195,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Adiciona o Listener que escuta apenas o child messages
             mOfertasDatabaseReference.orderByChild("data").addChildEventListener(mChildEventListener);
+            ViewUtils.dismissProgress();
         }
     }
 

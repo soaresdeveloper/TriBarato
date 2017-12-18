@@ -1,5 +1,6 @@
 package br.com.soaresdeveloper.tribarato.Utils;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import java.util.List;
  */
 
 public class ViewUtils {
+
+    public static ProgressDialog mProgressDialog;
 
     public static void chamarToast(Context context, String mensagem) {
         Toast.makeText(context, mensagem, Toast.LENGTH_SHORT).show();
@@ -26,5 +29,19 @@ public class ViewUtils {
             }
         }
         return result;
+    }
+
+    public static void chamarProgress(Context context, String titulo) {
+        mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setMax(100);
+        mProgressDialog.setTitle(titulo);
+        mProgressDialog.show();
+    }
+
+    public static void dismissProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
     }
 }

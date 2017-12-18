@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +13,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/ht_titulo_oferta"
         android:inputType="text"
-        android:maxLength="35"/>
+        android:maxLength="35" />
 
     <EditText
         android:id="@+id/descricaoOferta"
@@ -22,15 +21,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/ht_descricao"
         android:inputType="textMultiLine"
-        android:maxLength="140"/>
-
-    <EditText
-        android:id="@+id/enderecoOferta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/ht_endereco"
-        android:inputType="textMultiLine"
-        android:maxLength="140"/>
+        android:maxLength="140" />
 
     <EditText
         android:id="@+id/precoOferta"
@@ -39,6 +30,34 @@
         android:hint="@string/ht_preco"
         android:inputType="numberDecimal" />
 
+    <EditText
+        android:id="@+id/siteOferta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ht_site"
+        android:inputType="textUri" />
+
+    <EditText
+        android:id="@+id/localOferta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ht_local" />
+
+
+    <EditText
+        android:id="@+id/estadoOferta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lbl_estado" />
+
+
+    <EditText
+        android:id="@+id/cidadeOferta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ht_cidade_oferta"
+        android:maxLines="1" />
+
     <Button
         android:id="@+id/btnPublicarOferta"
         android:layout_width="match_parent"
@@ -46,9 +65,9 @@
         android:layout_marginTop="@dimen/medium_vertical"
         android:background="@color/colorPrimary"
         android:text="@string/btn_publicar_oferta"
-        android:textSize="@dimen/txt_button"
         android:textColor="#fff"
-        android:textStyle="bold"/>
+        android:textSize="@dimen/txt_button"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnLimparCampos"
@@ -57,16 +76,8 @@
         android:layout_marginTop="@dimen/small_vertical"
         android:background="@color/com_facebook_button_border_color_focused"
         android:text="@string/btn_limpar_campos"
-        android:textSize="@dimen/txt_button"
         android:textColor="@color/colorPrimary"
-        android:textStyle="bold"/>
-
-    <ProgressBar
-        android:id="@+id/progressPbOferta"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_gravity="center"/>
+        android:textSize="@dimen/txt_button"
+        android:textStyle="bold" />
 
 </LinearLayout>

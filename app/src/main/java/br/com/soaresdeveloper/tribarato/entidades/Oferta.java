@@ -1,5 +1,7 @@
 package br.com.soaresdeveloper.tribarato.entidades;
 
+import java.util.List;
+
 /**
  * Created by soares on 14/12/17.
  */
@@ -7,21 +9,29 @@ package br.com.soaresdeveloper.tribarato.entidades;
 public class Oferta {
 
     private Usuario usuario;
+    private List<Comentario> comentarios;
     private String titulo;
     private String descricao;
     private String preco;
-    private String endereco;
+    private String estado;
+    private String cidade;
+    private String local;
+    private String site;
     private String data;
 
     public Oferta() {
     }
 
-    public Oferta(Usuario usuario, String titulo, String descricao, String preco, String endereco, String data) {
+    public Oferta(Usuario usuario, List<Comentario> comentarios, String titulo, String descricao, String preco, String estado, String cidade, String local, String site, String data) {
         this.usuario = usuario;
+        this.comentarios = comentarios;
         this.titulo = titulo;
         this.descricao = descricao;
         this.preco = preco;
-        this.endereco = endereco;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.local = local;
+        this.site = site;
         this.data = data;
     }
 
@@ -31,6 +41,14 @@ public class Oferta {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     public String getTitulo() {
@@ -57,12 +75,36 @@ public class Oferta {
         this.preco = preco;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 
     public String getData() {
