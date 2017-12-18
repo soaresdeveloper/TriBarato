@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,8 +36,10 @@ import br.com.soaresdeveloper.tribarato.entidades.Usuario;
 
 public class CriarOfertaActivity extends AppCompatActivity {
 
+    private static final String BANNER_ID = "ca-app-pub-2446788647018391/2226429123";
     EditText edtTituloOferta, edtDescricaoOferta, edtPrecoOferta, edtEstadoOferta, edtCidadeOferta, edtSiteOferta, edtLocalOferta;
     Button btnPublicarOferta, btnLimparCampos;
+    private InterstitialAd mInterstitialAd;
 
     private Oferta oferta;
     private Usuario mUsuario;
@@ -66,6 +70,12 @@ public class CriarOfertaActivity extends AppCompatActivity {
         mOfertasDatabaseReference = mFirebaseDatabase.getReference().child("ofertas");
         mUsuariosDatabaseReference = mFirebaseDatabase.getReference().child("usuarios");
         auth = FirebaseAuth.getInstance();
+
+        // Inicializacao anuncio
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(BANNER_ID);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
 
         edtPrecoOferta.addTextChangedListener(new MascaraMonetaria(edtPrecoOferta));
 
@@ -108,6 +118,11 @@ public class CriarOfertaActivity extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
 
                                 ViewUtils.dismissProgress();
+
+                                if (mInterstitialAd.isLoaded()) {
+                                    mInterstitialAd.show();
+                                }
+
                                 ViewUtils.chamarToast(CriarOfertaActivity.this, "Oferta publicada com sucesso!");
 
                                 limparCampos();
